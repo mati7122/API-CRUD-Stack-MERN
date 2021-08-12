@@ -5,8 +5,8 @@ const cors = require('cors');
 const app = express();
 
 //mongo connect
-// const connectDB = require('./mongoConnect');
-// connectDB;
+const connectDB = require('./mongoConnect');
+connectDB;
 
 //middlewares
 app.use(cors())
