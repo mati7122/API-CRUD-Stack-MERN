@@ -48,7 +48,7 @@ const controller = {
                 })
         }
 
-        else{
+        else {
             return res.status(200).send({
                 status: 'error',
                 message: 'Los datos no son validos'
@@ -101,6 +101,19 @@ const controller = {
                 res.status(200).send({
                     message: 'succes',
                     succes
+                })
+            })
+    },
+
+    getOne: (req, res) => {
+
+        let id = req.params.id;
+
+        User.findById(id)
+            .then(item => {
+                res.status(200).send({
+                    message: 'succes',
+                    item
                 })
             })
     }

@@ -8,5 +8,6 @@ router.post('/save', controller.save);
 router.post('/update/:id', controller.update);
 router.delete('/delete/:id', controller.delete);
 router.get('/get-data', controller.getData);
+router.get('/get-one/:id', controller.getOne);
 
 module.exports = router;
