@@ -10,6 +10,4 @@ mongoose.connect('mongodb+srv://matiash:matiash@carsdb.290x4.mongodb.net/myFirst
             console.log(`Server runing in port ${PORT}`)
         })
     })
-// app
-//     .get('/', (req, res) => )
 
