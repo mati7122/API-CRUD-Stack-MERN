@@ -20,7 +20,7 @@ const controller = {
             validate_number_numeric = validator.isNumeric(params.number);
             validate_location = !validator.isEmpty(params.location);
         } catch (err) {
-            return res.status(200).send({
+            return res.status(400).send({
                 status: 'error',
                 message: 'Faltan datos por enviar'
             })
@@ -49,7 +49,7 @@ const controller = {
         }
 
         else {
-            return res.status(200).send({
+            return res.status(500).send({
                 status: 'error',
                 message: 'Los datos no son validos'
             })
