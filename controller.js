@@ -48,12 +48,12 @@ const controller = {
                 })
         }
 
-        else {
-            return res.status(500).send({
-                status: 'error',
-                message: 'Los datos no son validos'
-            })
-        }
+        // else {
+        //     return res.status(500).send({
+        //         status: 'error',
+        //         message: 'Los datos no son validos'
+        //     })
+        // }
 
 
 
