@@ -4,12 +4,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-
-//middlewares
+//Middlewares
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.use(express.static('public'));
 app.use('/api', routes);
 
 module.exports = app;

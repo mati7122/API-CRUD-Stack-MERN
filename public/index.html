@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD API REST</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>CRUD API REST</h1>
+        <!-- <img src="../assets/book.svg"/>
+        <img src="../assets/update.svg">
+        <img src="../assets/refresh.svg"/>
+        <img src="../assets/trash.svg"/> -->
+        <img
+            src="data:image/png;base64,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" />
+    </div>
+    <h2>Welcome!! :)</h2>
+    <p>To get data from my API: </p>
+    <div>
+        <div>
+            <h2>Get all user data:</h2>
+            <strong>api/get-data</strong>
+        </div>
+        <div>
+            <h2>Get one user</h2>
+            <strong>api/get-one/:id</strong>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    * {
+        font-family: 'Noto Sans JP', sans-serif;
+    }
+</style>
