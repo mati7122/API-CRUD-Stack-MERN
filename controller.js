@@ -15,6 +15,7 @@ const controller = {
 
         try {
             validate__name = !validator.isEmpty(params.name);
+            validate__name__isString = !validator.isNumeric(params.name);
             validate__email = !validator.isEmpty(params.email);
             validate__email__isEmail = validator.isEmail(params.email);
             validate__number = !validator.isEmpty(params.number);
@@ -27,7 +28,7 @@ const controller = {
             })
         }
 
-        if (validate__name && validate__email && validate__number && validate__location && validate__number__isNumber && validate__email__isEmail) {
+        if (validate__name && validate__name__isString && validate__email && validate__number && validate__location && validate__number__isNumber && validate__email__isEmail) {
             var userNew = new User();
 
             userNew.name = params.name;
@@ -81,14 +82,23 @@ const controller = {
 
         let params = req.body;
 
-        validate__name = !validator.isEmpty(params.name);
-        validate__email = !validator.isEmpty(params.email);
-        validate__email__isEmail = validator.isEmail(params.email);
-        validate__number = !validator.isEmpty(params.number);
-        validate__number__isNumber = validator.isNumeric(params.number);
-        validate__location = !validator.isEmpty(params.location);
+        try {
+            validate__name = !validator.isEmpty(params.name);
+            validate__name__isString = !validator.isNumeric(params.name);
+            validate__email = !validator.isEmpty(params.email);
+            validate__email__isEmail = validator.isEmail(params.email);
+            validate__number = !validator.isEmpty(params.number);
+            validate__number__isNumber = validator.isNumeric(params.number);
+            validate__location = !validator.isEmpty(params.location);
+        }
+        catch (err) {
+            return res.status(400).send({
+                status: 'error',
+                message: 'Faltan datos por enviar'
+            })
+        }
 
-        if (validate__name && validate__email && validate__email__isEmail && validate__number && validate__number__isNumber && validate__location) {
+        if (validate__name && validate__name__isString && validate__email && validate__email__isEmail && validate__number && validate__number__isNumber && validate__location) {
             User.updateOne({ _id: id }, params)
                 .catch(error => {
                     res.status(500).send({
@@ -102,10 +112,10 @@ const controller = {
                 })
         }
 
-        else{
+        else {
             return res.status(500).send({
-                'status': 'Error',
-                'message': 'Los datos no son validos'
+                status: 'Error',
+                message: 'Los datos no son validos'
             })
         }
 
