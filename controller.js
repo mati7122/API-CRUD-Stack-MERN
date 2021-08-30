@@ -14,11 +14,12 @@ const controller = {
         let params = req.body;
 
         try {
-            validate_name = !validator.isEmpty(params.name);
-            validate_email = !validator.isEmpty(params.email);
-            validate_number = !validator.isEmpty(params.number);
-            validate_number_numeric = validator.isNumeric(params.number);
-            validate_location = !validator.isEmpty(params.location);
+            validate__name = !validator.isEmpty(params.name);
+            validate__email = !validator.isEmpty(params.email);
+            validate__email__isEmail = validator.isEmail(params.email);
+            validate__number = !validator.isEmpty(params.number);
+            validate__number__isNumber = validator.isNumeric(params.number);
+            validate__location = !validator.isEmpty(params.location);
         } catch (err) {
             return res.status(400).send({
                 status: 'error',
@@ -26,7 +27,7 @@ const controller = {
             })
         }
 
-        if (validate_name && validate_email && validate_number && validate_location && validate_number_numeric) {
+        if (validate__name && validate__email && validate__number && validate__location && validate__number__isNumber && validate__email__isEmail) {
             var userNew = new User();
 
             userNew.name = params.name;
@@ -50,7 +51,7 @@ const controller = {
 
         else {
             return res.status(500).send({
-                status: 'error',
+                status: 'Error',
                 message: 'Los datos no son validos'
             })
         }
@@ -80,17 +81,35 @@ const controller = {
 
         let params = req.body;
 
-        User.updateOne({ _id: id }, params)
-            .catch(error => {
-                res.status(500).send({
-                    message: 'No fue posible actualizar los datos'
-                });
-            })
-            .then(succes => {
-                res.status(200).send({
-                    message: 'Los datos han sido guardados con éxito'
+        validate__name = !validator.isEmpty(params.name);
+        validate__email = !validator.isEmpty(params.email);
+        validate__email__isEmail = validator.isEmail(params.email);
+        validate__number = !validator.isEmpty(params.number);
+        validate__number__isNumber = validator.isNumeric(params.number);
+        validate__location = !validator.isEmpty(params.location);
+
+        if (validate__name && validate__email && validate__email__isEmail && validate__number && validate__number__isNumber && validate__location) {
+            User.updateOne({ _id: id }, params)
+                .catch(error => {
+                    res.status(500).send({
+                        message: 'No fue posible actualizar los datos'
+                    });
                 })
+                .then(succes => {
+                    res.status(200).send({
+                        message: 'Los datos han sido guardados con éxito'
+                    })
+                })
+        }
+
+        else{
+            return res.status(500).send({
+                'status': 'Error',
+                'message': 'Los datos no son validos'
             })
+        }
+
+
     },
 
     getData: (req, res) => {
